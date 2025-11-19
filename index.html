@@ -8,10 +8,10 @@
 </head>
 <body>
 <audio id="backgroundMusic" loop>
-        <source src="music.mp3" type="audio/mpeg">
-        Trình duyệt của bạn không hỗ trợ phát âm thanh.
-    </audio>
-    <div class="container">
+    <source src="music.mp3" type="audio/mpeg">
+    Trình duyệt của bạn không hỗ trợ phát âm thanh.
+</audio>
+    <div class="container" id="container"> 
         <div class="gift-box" id="giftBox">
             <div class="top-lid"></div>
             <div class="box-body"></div>
@@ -22,26 +22,29 @@
 
         <div class="slideshow-container" id="slideshow" style="display: none;">
             <div class="mySlides fade">
-                <img src="jpg/6f8be8d1-8c0f-4c3e-a0c6-7ef680398b8d.jfif?text=Kỷ+niệm+1" style="width:100%">
+                <img src="jpg/6f8be8d1-8c0f-4c3e-a0c6-7ef680398b8d.jfif" alt="Kỷ niệm 1"> 
                 <div class="text">Cô ơi, những bài giảng của cô luôn là hành trang quý giá nhất!</div>
             </div>
 
             <div class="mySlides fade">
-                <img src="jpg/d0b71498-725b-41d8-b761-aa73efed230c.jfif?text=Kỷ+niệm+2" style="width:100%">
+                <img src="jpg/d0b71498-725b-41d8-b761-aa73efed230c.jfif" alt="Kỷ niệm 2">
                 <div class="text">Em vẫn nhớ những câu chuyện cô kể, vừa hài hước vừa sâu sắc.</div>
             </div>
 
             <div class="mySlides fade">
-                <img src="jpg/ef6d52a3-4427-4102-90b0-d11936830229.jfif?text=Kỷ+niệm+3" style="width:100%">
+                <img src="jpg/ef6d52a3-4427-4102-90b0-d11936830229.jfif" alt="Kỷ niệm 3">
                 <div class="text">Cảm ơn cô đã luôn kiên nhẫn và dạy bảo lắng nghe em.</div>
             </div>
             
             <div class="mySlides fade">
-                <img src="jpg/f1f5d469-1ffa-43da-ab6a-f981ab94f338.jfif?text=Kỷ+niệm+4" style="width:100%">
+                <img src="jpg/f1f5d469-1ffa-43da-ab6a-f981ab94f338.jfif" alt="Kỷ niệm 4">
                 <div class="text">Chúc cô 20/11 thật vui vẻ và tràn ngập niềm hạnh phúc!</div>
             </div>
+            
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
-            </div>
+        </div>
         <div class="dots-container" id="dotsContainer" style="display: none;"></div>
 
 
@@ -57,15 +60,16 @@
                 I wish you always good health, happiness with your family, and that you can continue to share knowledge with future generations. May all the best things come to you.
                 <br><br>
                 With all my respect and deep thanks,<br>
-               	Nguyễn Lộc<br>
+                Nguyễn Lộc<br>
             </p>
             <p class="signature">Kính gửi</p>
-			<p class="credit">Cre: Nguyễn Lộc - Vietnamese Teachers 20/11 - FB: Nguyễn Lộc</p>
-			<p class="credit">Cre: Lời chuc Em có tham khảo AI và không hoàn toàn 100% là em tự suy nghĩ ra :(((. Sr Teacher nhá :( </p>
+            <p class="credit">Cre: Nguyễn Lộc - Vietnamese Teachers 20/11 - FB: Nguyễn Lộc</p>
+            <p class="credit">Lời chúc Em có tham khảo không hoàn toàn là em tự suy nghĩ ra :((</p>
+            <p class="credit">Với có sử dụng AI để ghép câu nên em nghĩ là có sai:))) </p>
+            <p class="credit">Chúc cô tất cả nhé <3 </p>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
-
 </html>
