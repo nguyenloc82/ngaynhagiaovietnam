@@ -17,17 +17,6 @@ body {
     overflow-x: hidden;
 }
 
-body::before {
-    content: "\00A9  Nguyễn Lộc - 20-11 Ngày Giáo Việt Nam - FB: Nguyễn Lộc";
-    color: white;
-    opacity: 0.7;
-    font-size: 10px;
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    z-index: 150;
-}
-
 .container {
     perspective: 1000px;
     /* Cập nhật container để căn giữa nội dung */
@@ -276,3 +265,4 @@ body::before {
     }
 
 }
+
