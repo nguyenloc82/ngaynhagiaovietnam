@@ -1,0 +1,266 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* BỎ display: flex; và align-items: center; ở đây */
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px; /* Thêm padding để nội dung không dính sát mép */
+    
+    /* --- BACKGROUND MỚI CHO 20/11 --- */
+    background-color: #f0fff0; /* Màu nền nhạt */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100" opacity="0.1"><line x1="0" y1="0" x2="100" y2="100" stroke="%238bc34a" stroke-width="0.5" /><line x1="0" y1="100" x2="100" y2="0" stroke="%238bc34a" stroke-width="0.5" /></svg>');
+    background-repeat: repeat;
+    background-size: 50px 50px;
+    /* ---------------------------------- */
+    
+    /* QUAN TRỌNG: Loại bỏ overflow: hidden; để cho phép cuộn */
+    /* Thay vào đó, dùng overflow-x: hidden để tránh thanh cuộn ngang không cần thiết */
+    overflow-x: hidden;
+}
+
+.container {
+    perspective: 1000px;
+    /* Cập nhật container để căn giữa nội dung */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa theo chiều ngang */
+    width: 100%;
+    min-height: calc(100vh - 40px); /* Giúp căn giữa hộp quà ban đầu */
+    justify-content: center; /* Căn giữa hộp quà ban đầu */
+    
+    /* Thêm animation transition để khi hộp quà ẩn, container không bị nhảy đột ngột */
+    transition: all 0.5s ease-in-out;
+}
+
+/* THÊM MỘT CLASS MỚI CHO TRẠNG THÁI CUỘN */
+.container.scrollable {
+    justify-content: flex-start; /* Khi chuyển sang lá thư, nội dung dồn lên trên */
+    min-height: auto; /* Cho phép mở rộng chiều cao */
+}
+
+/* --- Hộp Quà --- (Giữ nguyên) */
+.gift-box {
+    position: relative;
+    width: 200px;
+    height: 150px;
+    margin: 50px auto;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 1s ease-in-out;
+}
+
+.gift-box:hover .click-text {
+    opacity: 1;
+}
+/* ... Giữ nguyên style hộp quà, ribbon, bow, click-text ... */
+
+.top-lid {
+    position: absolute;
+    width: 220px;
+    height: 40px;
+    background: #1b5e20; /* Xanh lá đậm - Màu phấn bảng */
+    border-radius: 5px;
+    top: -20px;
+    left: -10px;
+    z-index: 2;
+    transform-origin: bottom center;
+    transition: transform 0.5s ease-in-out;
+}
+
+.box-body {
+    position: absolute;
+    width: 200px;
+    height: 150px;
+    background: #388e3c; /* Xanh lá vừa */
+    border-radius: 5px;
+    z-index: 1;
+    border: 2px solid #1b5e20;
+}
+
+.ribbon {
+    position: absolute;
+    width: 30px;
+    height: 150px;
+    background: #ffcc80; /* Màu vàng cam ấm áp */
+    left: 85px;
+    z-index: 3;
+    border-radius: 2px;
+}
+
+.ribbon::before {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 30px;
+    background: #ffcc80; /* Màu vàng cam ấm áp */
+    top: 60px;
+    left: -85px;
+    border-radius: 2px;
+}
+
+.bow {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #ffb74d; /* Màu vàng cam */
+    border-radius: 50%;
+    top: -45px;
+    left: 70px;
+    z-index: 4;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.click-text {
+    position: absolute;
+    top: 170px;
+    width: 100%;
+    text-align: center;
+    color: #1b5e20;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Hiệu ứng khi hộp quà mở */
+.gift-box.open .top-lid {
+    transform: rotateX(-90deg) translateY(-20px) translateZ(20px);
+}
+
+.gift-box.open .ribbon,
+.gift-box.open .bow {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+
+
+/* --- Slideshow --- (Giữ nguyên) */
+.slideshow-container {
+    max-width: 700px;
+    position: relative;
+    margin: auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    overflow: hidden;
+    padding-bottom: 30px; 
+    border: 3px solid #8bc34a; /* Khung màu xanh lá nhẹ */
+}
+
+.mySlides {
+    display: none;
+    text-align: center;
+}
+
+.mySlides img {
+    width: 40%; /* Giảm xuống 60% hoặc thậm chí 50% nếu muốn nhỏ hơn nữa */
+    max-width: 300px; /* Giảm max-width xuống, ví dụ 400px */
+    height: auto; /* Giữ tỷ lệ khung hình */
+    display: block;
+    margin: 20px auto 15px auto; /* Tăng margin để có thêm khoảng trống */
+    border-radius: 6px; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Tăng đổ bóng nhẹ */
+    border: 1px solid #ddd; 
+}
+
+/* Bạn cũng có thể điều chỉnh lại padding của slideshow-container */
+.slideshow-container {
+    max-width: 650px; /* Có thể giảm cả max-width của container tổng thể */
+    position: relative;
+    margin: 30px auto; /* Tăng margin trên dưới cho container */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    overflow: hidden;
+    padding-bottom: 30px; 
+    border: 3px solid #8bc34a; 
+    padding-top: 15px; 
+}
+
+.text {
+    color: #333;
+    font-size: 1.2em;
+    padding: 15px;
+    text-align: center;
+    background-color: #f1f8e9; /* Nền lời chúc nhạt */
+}
+
+/* Hiệu ứng chuyển động mờ dần */
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+/* Dots */
+.dots-container {
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}
+.dot {
+    cursor: pointer;
+    height: 10px;
+    width: 10px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active {
+    background-color: #388e3c; /* Màu xanh lá đậm */
+}
+
+/* --- Lá thư cuối cùng --- (Giữ nguyên) */
+.final-letter {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fffaf0; /* Màu giấy thư nhẹ */
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+    line-height: 1.8;
+    color: #444;
+    font-size: 1.1em;
+    text-align: justify;
+    border: 2px dashed #ffb74d; /* Viền nét đứt vàng cam */
+    animation: slideInUp 1s ease-out forwards;
+}
+
+.letter-heading {
+    text-align: center;
+    font-size: 1.8em;
+    color: #1b5e20; /* Màu xanh lá đậm */
+    margin-bottom: 25px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.final-letter p {
+    margin-bottom: 1em;
+}
+
+.signature {
+    text-align: right;
+    margin-top: 30px;
+    font-style: italic;
+    color: #666;
+    font-weight: 500;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
